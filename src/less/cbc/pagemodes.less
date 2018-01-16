@@ -1,0 +1,170 @@
+// Desktop
+@pmSingleMargin: 60px;
+@pmPanelLeftMargin: 40px;
+@pmPanelRightMargin: 10px;
+@pmPanelLeftMarginWide: @pmSingleMargin;
+@pmPanelRightMarginWide: @pmSingleMargin - 15px;
+
+// Phone
+@pmSingleMarginPhone: 5px;
+@pmPanelLeftMarginPhone: 5px;
+@pmPanelRightMarginPhone: 5px;
+@pmPanelLeftMarginWidePhone: @pmSingleMarginPhone;
+@pmPanelRightMarginWidePhone: @pmSingleMarginPhone;
+
+.modal {
+  .modal-body {
+    // padding: 25px 15px 25px;
+  }
+  .modal-footer{
+    .unlock-btns-wrapper {
+      .modal-close-btn{
+          width: 16%;
+        }
+        .modal-submit-btn {
+          width: 25%;
+        }
+      @media (max-width: @screen-xs-max) {
+        .modal-close-btn{
+          width: 24%;
+        }
+        .modal-submit-btn {
+          width: 73%;
+          margin-left: 0;
+        }
+        
+      }
+      @media (max-width: @screen-sm-max) and (min-width: @screen-xs-max) {
+        .modal-close-btn{
+          width: 16.666666666666664%;
+        }
+        .modal-submit-btn {
+          width: 33.33333333333333%;
+        } 
+      }
+      
+
+    }
+  }
+  .question {
+    color: @black;
+    text-align: center;
+    margin: 0 0 0 10px;
+    font-size: 15px;
+  }
+
+  .actions {
+    margin: 40px 0 0 0;
+    text-align: center;
+
+    .btn {
+      margin: 0 5px;
+      padding: 10px 30px;
+    }
+    //media for md size
+    @media (min-width: @screen-md) {
+      .delete-contact-btn {
+        width: 45%;
+        margin: 0;
+      }
+      .cancel-btn {
+        width: 15%;
+        margin: 0;
+        margin-left: 5%;
+        padding-left: 18px;
+      }
+    }
+   // media for sm size
+    @media (max-width: @screen-sm-max) and (min-width: @screen-xs-max) {
+      .delete-contact-btn {
+        width: 30%;
+        margin: 0;
+      }
+      .cancel-btn {
+        width: 15%;
+        margin: 0;
+        margin-left: 5%;
+        padding-left: 18px;
+      }
+      
+    }
+  // media for xs size
+    @media (max-width: @screen-xs-max) {
+      .delete-contact-btn {
+        width: 60%;
+        margin: 0;
+      }
+      .cancel-btn {
+        width: 30%;
+        margin: 0;
+        margin-left: 5%;
+      }
+      
+    }
+    a {
+      margin: 0 5px;
+    }
+  }
+}
+.modal-backdrop {
+  opacity: 0.8 !important;
+}
+
+/* A common class for all data-driven pages */
+.ddpage {
+  font-size: 13px;
+
+  .hash {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .type {
+    background-color: @lightgray;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    color: @darkgray;
+
+    strong {
+      font-weight: normal;
+      font-family: "OpenSansRegular";
+      padding-left: 10px;
+      color: @black;
+    }
+  }
+
+  .details {
+    .clearfix;
+    dt {
+      font-family: "OpenSansRegular";
+      color: @darkgray;
+      clear: left;
+      float: left;
+      width: 120px;
+      margin: 0;
+      padding: 8px 0;
+      @media (max-width: @screen-xs-max) {
+        width: 100%;
+      }
+    }
+    dd {
+      float: left;
+      margin: 0;
+      padding: 8px 0;
+      color: @black;
+    }
+
+    &.half {
+      float: left;
+      width: 450px;
+      &:first-child {
+        padding-right: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}

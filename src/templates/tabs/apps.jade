@@ -1,0 +1,41 @@
+section.col-xs-12.content(ng-controller="AppsCtrl")
+
+  //- Disconnected
+  group.disconnected(ng-hide="connected")
+    p.literal(l10n) You have to be online to see this screen
+
+  group.disconnected(ng-hide="!connected || loadState.account")
+    p.literal(l10n) Loading...
+
+  div(ng-show="connected && loadState.account")
+    .row
+      .col-xs-12
+        p.literal cbc Apps
+        hr
+    div(ng-show="userBlob.data.apps", ng-repeat="app in userBlob.data.apps")
+      .row
+        .col-sm-10(ng-bind="app.name") 
+        .col-sm-2
+          button.btn.btn-sm.btn-block.btn-danger(ng-click="remove(app.cbcAddress)") Remove
+      .row
+        .col-xs-12
+          hr
+    form.row.row-padding-small(name="addForm", ng-submit="add()")
+      .col-xs-12
+        label(for="cbcAddress") Add an app
+      .col-sm-4
+        input.form-control#cbcAddress(
+          name='cbcAddress', type="text"
+          l10n-placeholder="App cbc Address"
+          ng-model='app.cbcAddress'
+          required, rp-dest, rp-dest-address)
+        .errorGroup(ng-messages='addForm.cbcAddress.$dirty && addForm.cbcAddress.$error')
+          .error(ng-message='required', l10n)
+            | Please enter a cbc address.
+          .error(ng-message='rpDest', l10n)
+            | Please enter a valid cbc address.
+      .col-sm-2
+        button.btn.btn-block.btn-success(
+          type='submit', ng-disabled='addForm.$invalid') Add
+      .col-sm-2.success(ng-show="success && !error") Awesome!
+      .col-sm-2.error(ng-show="error", ng-bind="error") 

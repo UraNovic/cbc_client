@@ -1,0 +1,11 @@
+h4(l10n) Account settings
+.section
+  .descriptor(l10n) cbc name
+  .row.public-account-row
+    .col-xs-9.col-sm-6.username ~{{userCredentials.username}}
+    .col-xs-3.col-sm-3.edit-account-btn-wrapper
+      a.btn.btn-cancel.btn-block(href="{{globalOptions.ids_url}}/identity", target="_blank", l10n) edit
+
+.section
+  .descriptor#address(l10n) cbc address
+  div(ng-bind="address")

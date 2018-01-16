@@ -1,0 +1,287 @@
+// TODO all _ or all -
+.loading_text {
+  padding-left: 5px;
+}
+
+.loading_sections {
+  padding-top: 10px;
+}
+
+.fa-bell {
+  font-size: 0.8em;
+}
+
+.delete-trust {
+  margin: 1.4em 0;
+}
+
+.banner {
+  margin: 2% 8.5% 0 8.5%;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 20px;
+  margin-top: 0;
+
+  #hide {
+    float: right;
+  }
+}
+
+.foot {
+  margin: 10px 0 0 0;
+  clear: both;
+  padding: 0;
+  background: @lightgray;
+
+  a,div {
+    display: block;
+    padding: 15px 40px;
+    text-align: center;
+    color: @darkblue;
+    border: 1px solid @lightgray;
+  }
+
+  #button_loader {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  a {
+    text-decoration: none;
+    color: @black;
+
+    &:hover {
+      background: @lightgray;
+      border: 1px solid @midgray
+    }
+  }
+}
+
+.currency_sets {
+  .label {
+    margin: 10px 0;
+    font-size: 18px;
+    color: @black;
+  }
+  .alternatives {
+    list-style-type: none;
+    font-family: 'OpenSansLight';
+
+    & > div {
+      text-align: center;
+      padding-top: 10px;
+
+      .am {
+        padding: 12px 0;
+        border: 1px solid @midgray;
+        border-bottom: none;
+        .border-radius(5px,0,0,5px);
+
+        .amnt {
+          font-size: 30px;
+          padding: 0 8px 0 0;
+        }
+        .currency {
+          font-size: 20px;
+          color:  @darkgray;
+        }
+
+        .ex {
+           color: @darkgray;
+
+           .pair {
+             margin-left: 5px;
+             font-size: 12px;
+           }
+        }
+      }
+      .btn {
+        .border-radius(0,5px,5px,0);
+        margin: 0;
+      }
+    }
+  }
+  .pathupdate, .orderbookupdate {
+    font-size: 12px;
+    color: @darkgray;
+    margin-top: 10px;
+  }
+}
+
+.save-address-form {
+  form {
+    max-height: 0;
+    overflow: hidden;
+    .transition-duration(0.6s);
+    margin: 0;
+
+    &.show {
+      max-height: 300px;
+    }
+
+    input {
+      width: 300px;
+    }
+
+    .btn {
+      width: 150px;
+      margin: 0 20px 0 0;
+    }
+
+    hr {
+      margin: 15px 0 0 0;
+    }
+    .add-contact-btns-wrapper {
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}
+
+header nav.navbar .open > .dropdown-menu {
+  background-color: @lightgray;
+}
+
+.dropdown-menu  {
+  padding: 0;
+
+  > li > a {
+    color: @midblue;
+    padding: 12px 20px;
+  }
+  li {
+    a {
+      i {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        background-image: url(/img/icons-dropdown.png);
+        opacity: .5;
+        background-repeat: no-repeat;
+        display: inline-block;
+        vertical-align: top;
+        &.icon-profile {
+          background-position: 0 0;
+        }
+        &.icon-settings {
+          background-position: -20px 0;
+
+        }
+        &.icon-logout {
+          background-position: -40px 0;
+        }
+      }
+      &:hover {
+        i {
+          &.icon-profile {
+         // background-position: 0 -20px;
+          }
+          &.icon-settings {
+            //background-position: -20px -20px;
+          }
+          &.icon-logout {
+           //background-position: -40px -20px;
+          }
+        }
+      }
+    }
+  }
+  .divider {
+    margin: 0;
+  }
+}
+
+.rp-h4 {
+  font-family: OpenSansSemibold, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size:   @font-size-base;
+  text-transform: uppercase;
+
+  small {
+    font-weight: normal;
+    line-height: 1;
+    text-transform: none;
+  }
+
+}
+
+.rp-base {
+  font-family: OpenSansRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size:   @font-size-base;
+  line-height: 1.3em;
+}
+
+.my-orders-title {
+  .rp-h4;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.rp-checkbox {
+  .rp-base;
+  margin-bottom: 5px;
+  span {
+    padding-bottom: 3px;
+  }
+  input {
+    margin: 0px 5px 0px 0px;
+    position: relative;
+    bottom: 1px;
+    vertical-align: middle;
+  }
+}
+
+.rp-select {
+  margin-bottom: 5px;
+  span {
+    padding: 0 5px 0 0;
+  }
+}
+
+// this taken from bootstrap 3.3.1
+.rp-hidden-xs {
+  @media (max-width: @screen-xs-max) {
+    .responsive-invisibility();
+  }
+}
+.rp-hidden-sm {
+  @media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+    .responsive-invisibility();
+  }
+}
+.rp-hidden-md {
+  @media (min-width: @screen-md) and (max-width: @screen-md-max) {
+    .responsive-invisibility();
+  }
+}
+.rp-hidden-lg {
+  @media (min-width: @screen-lg) {
+    .responsive-invisibility();
+  }
+}
+
+// tabs
+@import "tabs/balance.less";
+@import "tabs/history.less";
+@import "tabs/contact.less";
+@import "tabs/send.less";
+@import "tabs/exchange.less";
+@import "tabs/trade.less";
+@import "tabs/security.less";
+@import "tabs/settingsTrade.less";
+@import "tabs/advanced.less";
+@import "tabs/account.less";
+@import "tabs/trust.less";
+@import "tabs/gateways.less";
+@import "tabs/404.less";
+@import "tabs/authorization.less";
+@import "tabs/notifications.less";
+
+// modal
+@import "modals/modal.less";
+
+// icons
+@import "icons/currency-icons.less";

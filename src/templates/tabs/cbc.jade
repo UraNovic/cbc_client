@@ -1,0 +1,28 @@
+section.col-xs-12.content(ng-controller='cbcCtrl')
+
+  //- Disconnected
+
+  group.disconnected(ng-hide='connected')
+    p.literal(l10n="err-you-must-be-online-to-see-this-screen")
+      | You have to be online to see this screen
+
+  //- Funding
+  div(ng-show="!loadingAccount && !account.Balance && loadState.account && connected")
+    include ../tabs/banner/unfunded
+
+  div(ng-show='hasRTJapanTrust')
+    include banner/rtjapan
+  div(ng-show='hasRTJapanTrustWithRippling')
+    include banner/rtjapanrippling
+
+  .row(ng-show='connected')
+    .col-sm-3
+      include ../tabs/fund/menu
+    .col-sm-9.list
+      .fundcbc(ng-show="fundPage == 'cbc'")
+        div
+          .nameLine(l10n) Featured Gateways
+          .description(l10n) You can fund your account through gateways, which are entry and exit points off the cbc network.
+            | Gateways will accept deposits from you and then issue you balances on the cbc network in return.
+            | In order to hold a balance from a gateway, you must first add or trust the gateway.
+          a(href="https://cbc.com/knowledge_center/gateway-information/") Learn more about gateways.

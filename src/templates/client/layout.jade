@@ -1,0 +1,119 @@
+.mobile-nav(rp-snapper)
+  a.wallet(href="#/balance", ng-class="{active: $route.current.tabName == 'balance'}")
+    span.nav-icon.nav-icon-wallet
+    span(l10n) Balance
+  //- a.sub(href="#/balance", ng-class="{active: $route.current.tabName == 'balance'}", l10n) Balance
+  a.sub(href="#/history", ng-class="{active: $route.current.tabName == 'history'}", l10n) History
+  a.sub(href="#/contacts", ng-class="{active: $route.current.tabName == 'contacts'}", l10n) Contacts
+
+  a.send(href="#/send", ng-class="{active: $route.current.tabName == 'send'}")
+    span.nav-icon.nav-icon-send
+    span(l10n) Send
+
+  a.exchange(href="#/exchange", ng-class="{active: $route.current.tabName == 'exchange'}")
+    span.nav-icon.nav-icon-exchange
+    span(l10n) Trade (simple)
+  //- a.sub(href="#/exchange", ng-class="{active: $route.current.tabName == 'exchange'}", l10n) Convert
+  a.sub(href="#/trade", ng-class="{active: $route.current.tabName == 'trade'}", l10n) Trade (advanced)
+
+  a.fund(href="#/cbc", ng-class="{active: $route.current.tabName == 'cbc'}")
+    span.nav-icon.nav-icon-advanced
+    span(l10n) Featured gateways
+  //- a.sub(href="#/withdraw", ng-class="{active: $route.current.tabName == 'withdraw'}", l10n) Withdraw
+  a.sub(href="#/trust", ng-class="{active: $route.current.tabName == 'trust'}", l10n) Add any gateway (trust lines)
+
+  a.advanced(href="#/account/public", ng-class="{active: $route.current.tabName == 'account'}")
+    img(src="img/profile-gray.png")
+    span(l10n) Account
+  a.advanced(href="#/security", ng-class="{active: $route.current.tabName == 'security'}")
+    img(src="img/settings-gray.png")
+    span(l10n) Settings
+  a.advanced(href="#", ng-click='logout()')
+    img(src="img/logout-gray.png")
+    span(l10n) Logout
+
+// Wrapper
+div#wrapper
+  // Header
+  header(ng-class="{ 'loggedOut': !loginStatus }")
+    .headerWrapper(ng-class="{ 'loggedOut': !loginStatus }")
+      a.logo(href="/")
+
+    div(ng-if="loginStatus")
+      include ../client/navbar.jade
+
+  .landingWrapper(ng-class="{ 'loggedOut container-fluid': !loginStatus, 'container': loginStatus  }")
+
+    .landingContainer
+
+      .loginContainer
+
+        // Login
+        .container-fluid.main(ng-if="showLogin", id="t-login", role="main")
+          include ../tabs/login.jade
+
+        // Main
+        .container-fluid.main.pageLoading(ng-show="pageLoading")
+          img(src="img/sections.png", class="loader")
+        .container-fluid.main(ng-if="!showLogin && !pageLoading", id="{{$route.current.tabClass}}", role="main", ng-view)
+
+    // Footer
+    footer.container(ng-hide="pageLoading", ng-class="{ 'loggedOut': !loginStatus }")
+      .col-xs-12.col-sm-3
+        a(href="https://github.com/cbc/cbc-client/releases", target="_blank", l10n)
+          | Version: {{version}}
+        | <br>{{versionBranch}}
+
+      .col-xs-12.col-sm-9.right-links
+        a(href="https://cbctrade.com/#/tou", target="_blank", l10n) Terms of Use
+        a(href="https://cbctrade.com/#/privacypolicy", target="_blank", l10n) Privacy Policy
+        a(href="https://cbc.com/knowledge_categories/use-cbc-trade/", target="_blank", l10n) Support
+        a(href="https://cbclabs.atlassian.net/browse/WC", target="_blank", l10n) Bug reports
+        a(href="#/lang/en") English
+        a(href="#/lang/zh_CN") 中文
+        a(href="#/lang/ja") 日本語
+
+        // Language selector
+        rp-popup
+          a.last(href="", rp-popup-link, l10n) more...
+          div.languageSelector(rp-popup-content)
+            .modal-header
+              button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+              .modal-title(l10n) Select a language
+            .modal-body.row.list
+              .col-sm-6
+                a(href="#/lang/en") English
+              .col-sm-6
+                a(href="#/lang/zh_CN") 中文
+              .col-sm-6
+                a(href="#/lang/ca") Català
+              .col-sm-6
+                a(href="#/lang/de") Deutsch
+              .col-sm-6
+                a(href="#/lang/es") Español
+              .col-sm-6
+                a(href="#/lang/fr_FR") Français
+              .col-sm-6
+                a(href="#/lang/he_IL") עברית
+              .col-sm-6
+                a(href="#/lang/it") Italiano
+              .col-sm-6
+                a(href="#/lang/ja") 日本語
+              .col-sm-6
+                a(href="#/lang/ko") 한국말
+              .col-sm-6
+                a(href="#/lang/nl_NL") Nederlands
+              .col-sm-6
+                a(href="#/lang/nb_NO") Norsk
+              .col-sm-6
+                a(href="#/lang/pl") Polski
+              .col-sm-6
+                a(href="#/lang/pt_BR") Português brasileiro
+              .col-sm-6
+                a(href="#/lang/ro") Român
+              .col-sm-6
+                a(href="#/lang/ru") Русский
+              .col-sm-6
+                a(href="#/lang/sk") Slovenská
+              .col-sm-6
+                a(href="#/lang/tr") Türkçe

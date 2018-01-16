@@ -1,0 +1,214 @@
+section.col-xs-12.content(ng-controller='BtcCtrl')
+  //- the ng-states & ng-clicks should be implemented
+  //- Connected
+  //- group.connected(ng-show="connected")
+
+  //- Disconnected
+
+  group.disconnected(ng-hide='connected')
+    p.literal(l10n="err-you-must-be-online-to-see-this-screen")
+      | You have to be online to see this screen
+
+  //- Funding
+  div(ng-show="!loadingAccount && !account.Balance && loadState.account && connected")
+    include ../tabs/banner/unfunded
+
+  div(ng-show='hasRTJapanTrust')
+    include banner/rtjapan
+  div(ng-show='hasRTJapanTrustWithRippling')
+    include banner/rtjapanrippling
+
+  group.mode-granted.wide(ng-show='notif !== "clear"', ng-hide='!notif')
+    group(ng-switch="notif")
+      group.result-success(ng-switch-when="success")
+        h2.tx-status(l10n) Success! You can deposit BTC via your generated BTC receiving address.
+      group.result-error(ng-switch-when="error")
+        h2.tx-status(l10n) There was an error with your request.&#32;
+          p(l10n) Please try again later.
+      group.result-error(ng-switch-when="emailError")
+        h2.tx-status(l10n) There was an error with your request.&#32;
+
+  .row(ng-show='connected')
+    .col-sm-3
+      include ../tabs/fund/menu
+    .col-sm-9.list
+      div(ng-show='debug') This page is not available in debug mode
+      .fundBtc(ng-hide='debug')
+        .nameLine(l10n) Bitcoin Deposit
+        .B2R-wrap.row
+          .col-xs-12
+            .gateway.row
+              .col-md-3
+                .title(l10n) Gateway
+                .description(l10n) btc2cbc (~SnapSwap)&#32;
+                  a(href="https://www.btc2cbc.com", target="_blank") www.btc2cbc.com
+              .col-md-3
+                .title(l10n) Availability
+                .description(l10n) All countries, except US residents
+              .col-md-3
+                .title(l10n) Fees
+                .description(l10n) 0% for deposits/withdrawals, .2% when transferring
+              .col-md-3
+                .title(l10n) Rating
+                .description(l10n)
+                  a(href="https://coinist.co/cbc/assets/btc-btc2cbc", target="_blank") read reviews
+            .row.fund-tab-description(ng-show="!btcConnected")
+              .col-xs-12.col-md-8.col-lg-6
+                .descriptor(l10n) cbc Trade has partnered with btc2cbc to make depositing BTC easier. By proceeding, you agree to the btc2cbc&#32;
+                  a(href="https://btc2cbc.com/terms", target="_blank") terms of service.
+                  |&#32;Following this action will allow btc2cbc to hold BTC on your behalf.
+            .row.fund-tab-description
+              .col-xs-7.col-sm-5.col-md-4
+                rp-popup
+                  a.btn.btn-success.btn-sm.btn-block.sign(href="", rp-popup-link,
+                    ng-click="openPopup()", ng-show="!btcConnected && !loading && !loadingAccount && loadState.B2RApp", ng-disabled="emailError || countryDisallowed || profileUnverified", ng-hide="btcConnected",l10n) Add btc2cbc
+                  div.connectModal(rp-popup-content)
+                    .modal-header
+                      .navbar-brand.hidden-sm.modal-logo#logo
+                      .modal-title(l10n) Connect
+                    .modal-body
+                      div.modal-prompt(l10n) btc2cbc would like to:
+                      div.grey-focus
+                        div.modal-permissions(l10n) - Receive your email address&#32;
+                          span.modal-email(l10n) ({{userBlob.data.email}})
+                        div.modal-permissions(l10n) - Hold deposited BTC on your behalf
+                      div.modal-agreement(l10n) By proceeding, you agree to the btc2cbc
+                        a(href="https://btc2cbc.com/#/terms/of/service", target="_blank")  terms of service.
+                      div.modal-buttons
+                        button.modal-btn.btn.btn-default.btn-success.btn-md(ng-click="B2RSignup()",
+                          ng-disabled="loading")
+                          img(src="img/button-s.png", class="loader", ng-show="loading")
+                          span(class="loading_text", ng-show="loading", l10n) Loading...
+                          span(ng-hide="loading", l10n) Confirm
+                        button.modal-btn.btn.btn-default.btn-link.btn-cancel(data-dismiss="modal"
+                          ng-hide="loading", l10n) cancel
+                      span.modal-error(ng-show="generalError", l10n)
+                        | SnapSwap's btc2cbc service is currently unavailable.
+                        |  Please check back later.
+                      div.modal-error(ng-show="emailError", l10n)
+                        | You’ve already used this email address to generate a bitcoin receiving address in cbc Trade.
+                        | Please contact support@btc2cbc.com if you want to use this cbc Trade account instead.
+                button.btn.btn-primary(ng-show="!btcConnected && loading", ng-disabled="loading", l10n) Adding...
+                button.btn.btn-block.btn-primary(ng-show="showInstructions && btcConnected", type="submit", ng-click="toggle_instructions()", l10n) Hide instructions
+                button.btn.btn-block.btn-primary(ng-show="btcConnected && !showInstructions", type="submit", ng-click="toggle_instructions()", l10n) Show instructions
+
+              .connect.col-md-8.col-sm-7.col-xs-5
+                .description(ng-show="!loadingAccount && btcConnected && loadState.B2RApp")
+                  i.fa.fa-check
+                  span(l10n) Connected
+                  span(l10n) Connected
+                .description(ng-hide="loadingAccount || btcConnected || !loadState.B2RApp")
+                  i.fa.fa-times
+                  span(l10n) Not connected
+                .description(ng-show="loadingAccount || !loadState.B2RApp")
+                  img(src="img/button-s.png", class="loader")
+                  span(class="loading_text", l10n) Loading...
+              span.error(ng-show="generalError", l10n)
+                | SnapSwap's btc2cbc service is currently unavailable.
+                |  Please check back later.
+              span.error(ng-show="emailError", l10n)
+                | You’ve already used this email address to generate a bitcoin receiving address in cbc Trade.
+                | Please contact support@btc2cbc.com if you want to use this cbc Trade account instead.
+              span.error(ng-show="countryDisallowed || profileUnverified", l10n)
+                | We're sorry, but btc2cbc is not available for unverified accounts or US residents.
+
+        .row(ng-show="btcConnected && showInstructions")
+          .instructions.col-md-10
+            //a.dismiss#hide(href="", ng-click="toggle_instructions()")  ×
+
+            .active.col-xs-12(ng-show="B2R.active")
+              .title(l10n) Personal Bitcoin Deposit address (deposit BTC to your cbc account by sending BTC to this address)
+              .btc-address(ng-bind="B2R.instructions.instructionParams[0].value") 
+              .description(l10n) You can deposit an unlimited amount of BTC.
+              div(ng-show="loadState.B2RInstructions")
+                .description(ng-bind="B2R.instructions.instruction")
+                .snapswap-support-link
+                  a(href="https://b2r.uservoice.com/knowledgebase/articles/466148" target="_blank") More information
+                //.about(ng-hide="account.Balance", l10n) A small amount (~.001 BTC) of your first
+                  |  transfer will be converted to cbc to activate your wallet.&#32;
+                  a.why(href="https://cbc.com/wiki/Reserves",
+                  target="_blank", l10n-inc) Why?
+              .title(l10n) Withdrawal instructions
+              .description(l10n) To withdraw to a BTC address, go to the Send tab and enter the BTC address, and add @btc2cbc.com after the BTC address. Using the btc2cbc service, you will be able to
+                  | send to that BTC address.
+              div(ng-hide="loadState.B2RInstructions") Loading...
+          .inactive.col-xs-12(ng-hide="B2R.active")
+            span(ng-show="loading")
+              label(l10n) Waiting for response from SnapSwap service...
+            span(ng-hide="loading")
+              label(l10n) To deposit, generate a bitcoin receiving address
+                |  using the&#32;
+                a(href="https://btc2cbc.com", target="_blank") btc2cbc
+                |  service powered by SnapSwap.
+        br
+        .gateway.row
+          .col-md-3
+              .title(l10n) Gateway
+              .description(l10n) 
+                | Bitstamp (~bitstamp)
+                br
+                a(href="https://www.bitstamp.net", target="_blank") www.bitstamp.net
+          .col-md-3
+              .title(l10n) Availability
+              .description(l10n) All countries
+          .col-md-3
+              .title(l10n) Fees
+              .description(l10n) Deposit/withdrawal and when transferring .2%&#32;
+          .col-md-3
+              .title(l10n) Rating
+              .description(l10n)
+                a(href="https://coinist.co/cbc/gateways/bitstamp", target="_blank") read reviews
+
+        .row.fund-tab-description
+          .col-xs-12.col-md-8.col-lg-6
+            .descriptor(ng-show="!btc2Connected", l10n) cbc Trade has partnered with Bitstamp to provide easier access to BTC. Following this action will enable Bitstamp to hold BTC on your behalf.
+
+        .row.fund-tab-description
+          .col-xs-7.col-sm-5.col-md-4
+            button.btn.btn-large.btn-primary(ng-show="!btc2Connected && !btcLoading && loadState.account", type="submit", ng-click="save_btc_account()", ng-disabled="!account.Balance || !can_add_trust", l10n) Add Bitstamp
+            button.btn.btn-large.btn-primary(ng-show="!btc2Connected && btcLoading", type="submit", ng-disabled="btcLoading", l10n) Adding...
+            button.btn.btn-large.btn-primary(ng-show="showBtcInstructions && btc2Connected", type="submit", ng-click="toggle_btc_instructions()", l10n) Hide instructions
+            button.btn.btn-large.btn-primary(ng-show="btc2Connected && !showBtcInstructions", type="submit", ng-click="toggle_btc_instructions()", l10n) Show instructions
+
+          .connect.col-xs-5.col-sm-7.col-md-8(ng-hide="btcLoading")
+            .description.fa.fa-times(ng-show="!btc2Connected && account.Balance", l10n) Not connected
+            .description.fa.fa-check(ng-show="btc2Connected && account.Balance", l10n) Connected
+            .description(ng-show="!account.Balance && loadState.account", l10n) Your account has to be activated before you can add a gateway account.
+            .description(ng-show="!loadState.account")
+              img(src="img/button-s.png", class="loader")
+              span(class="loading_text", l10n) Loading...
+
+        .row(ng-show="showBtcInstructions && btc2Connected")
+          .instructions.col-md-10
+            a.dismiss(href="", id="hide", ng-click="toggle_btc_instructions()", l10n)  ×
+            .title(l10n) NEW CUSTOMERS- SIGN UP AT BITSTAMP
+            .description(l10n) 
+              | Register and verify your account at 
+              a(href="https://www.bitstamp.net", target="_blank") www.bitstamp.net
+              | . You will need:&#32;
+              ul
+                li
+                  p(l10n) A valid government-issued ID: driver's license, international passport, or national ID card.
+                li
+                  p(l10n) A proof of residency: tax return, council tax, utility bill, bank statement, certificate of residency issued by a government authority, etc.
+
+            .title(l10n) DEPOSIT OPTIONS
+            .description(l10n)
+              ul
+                li
+                  p(l10n) International wire transfer (.05% deposit fee on our side (minimum fee = $7.5) and 2 - 5 business days to credit)
+                li
+                  p(l10n) SEPA (1-3 business days)
+                li
+                  p(l10n) AstroPay (instantly from available countries)
+
+            .title(l10n) WITHDRAWAL OPTIONS
+            .description(l10n)
+              ul
+                li
+                  p(l10n) International wire transfer (.09% fee on our side (minimum fee = $15) and 2 - 5 business days)
+                li
+                  p(l10n) SEPA (1-3 business days)
+
+            .description If you have any questions, please feel free to contact Bitstamp at 
+              a(href="support@bitstamp.net", target="_blank") support@bitstamp.net

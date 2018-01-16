@@ -1,0 +1,89 @@
+section.col-xs-12.content(ng-controller="LoginCtrl")
+  //include ../tabs/banner/touannouncement
+  include ../tabs/banner/announcement
+  .row.auth-form-container(ng-hide="$routeParams.to")
+    .col-xs-12.hidden-xs
+      .welcomeText(l10n) Welcome to cbc Trade
+      hr
+      p.heroText(l10n) Trade hundreds of assets, from cbc to crypto to gold to fiat.
+    .auth-form-wrapper.col-xs-12.col-sm-6.col-md-5.col-lg-4
+      .loginOverlay(ng-show='loggingIn')
+        img.loader(src='img/main.png', alt='', title='')
+      .text-status(ng-show='status')
+        span.loggingIn(ng-bind="status")
+        br
+        .backend.error(ng-repeat="message in backendMessages")
+          span.error(ng-bind="message")
+      form(name='loginForm' action='{{authAction}}')
+        .submit-btn-container
+          a.btn.btn-submit.btn-block.btn-success#migrateBtn(type="submit", ng-click="migrate()")
+            span(l10n) Migrate Wallet to Gatehub
+          p.learnMore
+            a(href='https://cbc.com/knowledge_center/migrating-your-cbc-trade-account-to-gatehub', target="_blank", l10n-inc) Learn more about migrating.   
+          button.btn.btn-submit.btn-block.btn-success#loginBtn(type="submit" ng-click="submitForm('login')")
+            span(l10n) Log In   
+          p.signUpInfo 
+            a(href='https://cbc.com/knowledge_center/wallet-providers/', target="_blank", l10n-inc) Learn about wallet providers.
+          input(name='redirect_to', type='hidden', value='{{redirectTo}}')
+
+  .row.action-login(ng-if="$routeParams.to")
+    .col-xs-12.col-sm-6.col-md-6.uri-form-container
+      div.info(ng-show="'send' == $route.current.tabName")
+        p.literal(ng-bind="$routeParams.label")
+        div(ng-hide="$routeParams.amount", l10n)
+          p(l10n-inc) You're sending money to
+          .address {{ $routeParams.to | rpcbcnamefull:{tilde:true} }}
+          | .
+        div(ng-show="$routeParams.amount", l10n)
+          p(l10n-inc) You're sending
+          .amount(ng-show="$routeParams.amount")
+            span.number {{$routeParams.amount | rpamount:{cbc_human: true} }}
+            span.currency {{$routeParams.amount | rpcurrency}}
+          p(l10n-inc) &#32;to&#32;
+          .address {{ $routeParams.to | rpcbcnamefull:{tilde:true} }}
+          | .
+        p(l10n-inc) Log in to your cbc Trade account to continue. You
+          | will be able to confirm this transaction on the next page.
+      div.info(ng-show="'trust' == $route.current.tabName")
+        p.literal {{$routeParams.label}}
+        div(l10n)
+          p(l10n-inc) You're connecting to the gateway
+          .address {{ $routeParams.to | rpcbcnamefull:{tilde:true} }}
+          div(ng-show="$routeParams.currency", l10n-inc)
+            | for
+            .amount
+              span.currency(ng-bind="$routeParams.currency")
+          div(ng-show="$routeParams.amount", l10n-inc)
+            | with a limit of
+            .amount
+              span.currency {{$routeParams.amount | rpamount}} {{$routeParams.amount | rpcurrency}}
+          | .
+        p(l10n-inc) Log in to your cbc Trade account to continue. You
+          | will be able to confirm this transaction on the next page.
+
+      div.info(ng-show="'contacts' == $route.current.tabName")
+        p.literal(ng-bind="$routeParams.label")
+        span(l10n)
+          p(l10n-inc) You're adding
+          .address {{ $routeParams.to | rpcbcnamefull:{tilde:true} }}
+          p(l10n-inc) to your contacts list
+        p(l10n-inc) Log in to your cbc Trade account to continue. You
+          | will be able to confirm this transaction on the next page.
+
+
+    .col-xs-12.col-sm-6.col-md-5.col-lg-4.col-lg-offset-1.auth-form-container
+      .auth-form-wrapper
+        .loginOverlay(ng-show='loggingIn')
+          img.loader(src='img/main.png', alt='', title='')
+        .text-status(ng-show='status')
+          span.loggingIn(ng-bind="status")
+          br
+          .backend.error(ng-repeat="message in backendMessages")
+            span.error(ng-bind="message")
+        form(name='loginForm' action='{{authAction}}')
+          .submit-btn-container
+            button.btn.btn-submit.btn-block.btn-success#loginBtn(type="submit" ng-click="submitForm('login')")
+              span(l10n) Log In
+            button.btn.btn-submit.btn-block.btn-success#registerBtn(type="submit" ng-click="submitForm('register')")
+              span(l10n) Sign Up
+            input(name='redirect_to', type='hidden', value='{{redirectTo}}')

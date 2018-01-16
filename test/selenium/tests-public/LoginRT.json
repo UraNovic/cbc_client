@@ -1,0 +1,89 @@
+{
+  "type": "script",
+  "seleniumVersion": "2",
+  "formatVersion": 2,
+  "steps": [
+    {
+      "type": "get",
+      "url": "http://cbc.site:3000/#/login"
+    },
+    {
+      "type": "waitForTextPresent",
+      "text": "Welcome to cbc Trade"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "id",
+        "value": "loginBtn"
+      }
+    },
+    {
+      "type": "waitForTextPresent",
+      "text": "cbc NAME"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "identity"
+      },
+      "text": "ivegotnobalances"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "password"
+      },
+      "text": "password123"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "css selector",
+        "value": "button[type='submit']"
+      }
+    },
+    {
+      "type": "waitForTextPresent",
+      "text": "skip preliminary setup"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "skip preliminary setup"
+      }
+    },
+    {
+      "type": "waitForTextPresent",
+      "text": "BALANCES"
+    },
+    {
+      "type": "waitForTextPresent",
+      "text": "Connected to BrowserSync",
+      "negated": true
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "css selector",
+        "value": ".fa-cog"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "Log Out"
+      }
+    }
+  ],
+  "data": {
+    "configs": {},
+    "source": "none"
+  },
+  "inputs": [],
+  "timeoutSeconds": 420
+}

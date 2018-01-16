@@ -1,0 +1,522 @@
+/*
+*
+* New landing page styles
+*
+*/
+
+header.loggedOut {
+  display: block !important;
+}
+
+.headerWrapper {
+  display: none;
+}
+
+.headerWrapper.loggedOut {
+  display: block !important;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 99999;
+  height: 60px;
+  background: @white;
+  border-bottom: 1px solid @brand-success;
+}
+
+.logo {
+	margin: 15px 0 0 15px;
+	height: 30px !important;
+	width: 165px;
+	background: url('/img/logoV2.png') no-repeat;
+	display: block;
+	background-size: contain;
+}
+
+h4#announcement {
+  a {
+    color: @darkblue;
+    text-decoration: underline;
+    &:hover {
+    color:  @midgray;
+    text-decoration: underline;
+    }
+  }
+}
+
+.landingWrapper.loggedOut{
+  margin-top: 60px;
+
+	.circle {
+    margin: 30px auto;
+    width: 50%;
+	}
+
+	.landingContainer {
+	  background: url('/img/bg_title_v2.png'), -webkit-linear-gradient(160.57deg, rgba(67, 147, 184, 1) 0%, rgba(52, 106, 169, 1) 100%);
+	  background: url('/img/bg_title_v2.png'), -moz-linear-gradient(83.68% 67.94% 160.57deg,rgba(67, 147, 184, 1) 0%,rgba(52, 106, 169, 1) 100%);
+	  background: url('/img/bg_title_v2.png'), linear-gradient(160.57deg, rgba(67, 147, 184, 1) 0%, rgba(52, 106, 169, 1) 100%);
+	  background-repeat: no-repeat;
+	  background-position: 0% 30%;
+	  z-index: 1;
+	  background-color: #4c8db8; /* Old browsers */
+	  height: auto;
+	  min-height: 820px;
+
+
+		 // Pixel ratio: 2
+    @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2) {
+      background: url('/img/bg_title_v2_2x.png'), -webkit-linear-gradient(160.57deg, rgba(67, 147, 184, 1) 0%, rgba(52, 106, 169, 1) 100%);
+      background: url('/img/bg_title_v2_2x.png'), -moz-linear-gradient(83.68% 67.94% 160.57deg,rgba(67, 147, 184, 1) 0%,rgba(52, 106, 169, 1) 100%);
+      background: url('/img/bg_title_v2_2x.png'), linear-gradient(160.57deg, rgba(67, 147, 184, 1) 0%, rgba(52, 106, 169, 1) 100%);
+      background-repeat: no-repeat;
+      background-position: 0% 30%;
+      z-index: 1;
+      background-size: 100%;
+      height: auto;
+      min-height: 820px;
+    }
+
+	}
+
+	.loginContainer {
+		height: auto;
+		max-width: 1400px;
+		margin: auto;
+
+		& a {
+			color: @white;
+
+			&:hover {
+			color:  @midgray;
+			}
+		}
+	}
+
+	.sectionTitle {
+		text-align: center;
+		font-family: 'OpenSansLight';
+	}
+
+  .welcomeText {
+		text-align: center;
+		font-family: 'OpenSansLight';
+		font-size: 60px;
+		color: @white;
+		margin: 50px auto 30px;
+	}
+
+	hr {
+		width: 250px;
+		margin-top: 30px;
+		border-top: 1px solid @brand-success;
+	}
+
+	.whyUse, .gateways {
+		padding: 50px 0;
+	}
+
+	.whyUse, .featuredGateways {
+		background: @lightgray;
+		padding: 50px 0;
+		border-top: 1px solid @midgray;
+		border-bottom: 1px solid @midgray;
+	}
+
+	.description {
+		font-family: OpenSansBold;
+	}
+
+	.currencyPairs, .circleWrap, .holdAssets {
+		text-align: center;
+	}
+
+	.market {
+		margin-top: 40px;
+	}
+
+	.marketText, .description {
+		text-align: center;
+		padding: 10px 0 0 0;
+	}
+
+	.gatewayExample img.gateway {
+		opacity: .2;
+		-o-transition:.5s;
+		-ms-transition:.5s;
+		-moz-transition:5s;
+		-webkit-transition:.5s;
+		transition:.5s;
+		padding-top: 20px;
+
+		&:hover {
+		opacity: .7;
+		-o-transition:.5s;
+		-ms-transition:.5s;
+		-moz-transition:5s;
+		-webkit-transition:.5s;
+		transition:.5s;
+		}
+	}
+
+	#t-login .auth-form-container .auth-form-wrapper, #t-account .auth-form-container .auth-form-wrapper {
+		border: none;
+		background: transparent;
+		border-radius: 5px;
+	}
+
+	#t-login .auth-form-container h2, #t-account .auth-form-container h2 {
+		color: @white;
+		width: 100%;
+		margin: 0;
+	}
+
+	#t-login .auth-form-container .auth-form-wrapper label, #t-account .auth-form-container .auth-form-wrapper label, #t-login .auth-form-container .see-privacy-text, #t-account .auth-form-container .see-privacy-text {
+    color:  @landingblue;
+	}
+
+	#t-login .auth-form-container .sign-up-steps-list li.active, #t-account .auth-form-container .sign-up-steps-list li.active {
+		color: @white;
+		border-bottom: 1px solid @white !important;
+	}
+
+	h2.loginTop {
+		border-bottom: none !important;
+		padding-bottom: 0px !important;
+		font-size: 35px;
+	}
+
+	h2.signUpTop {
+		border-bottom: none !important;
+		padding-bottom: 0px !important;
+		font-size: 35px;
+
+		& a:hover {
+			text-decoration: none;
+		}
+	}
+
+	.auth-attention {
+		clear: both;
+	}
+
+	.sign-up-steps-list, .sign-up-steps-list li.completed {
+		clear: both;
+		padding-top: 20px;
+		color: @landingblue !important;
+	}
+
+	p.heroText {
+		text-align: center;
+		font-size: 16px;
+		color: @white;
+		max-width: 600px;
+		margin: auto;
+		padding: 20px 0 50px;
+	}
+
+	.form-group {
+    	clear: both;
+    	.hide-key {
+    		padding-left: 10px;
+    	}
+	}
+
+	button.btn.btn-link.recover {
+		color: @white;
+		font-size: 14px !important;
+	}
+
+	.migrateTab, .secretKey, .verifyText {
+		text-align: left !important;
+		color: @landingblue;
+	}
+
+  a#migrateBtn {
+    color: @white;
+    padding-top: 20px;
+  }
+
+	.secretText {
+		color: @brand-success !important;
+	}
+
+	.reSend {
+		cursor: pointer;
+		margin-top: 0px;
+		color: #fff;
+		position: relative;
+		img {
+			position: absolute;
+			left: -60px;
+			top: 2px;
+		}
+	}
+
+	.loading_text:hover {
+		color: @midgray;
+		text-decoration: underline;
+	}
+
+	.input-group-addon {
+		color: @white;
+		border: none !important;
+		background-color: rgba(65,79,89,.3);
+	}
+
+	.form-control {
+		background-color: rgba(52,65,77,.4);
+		color: @white;
+		border: none;
+
+		&:focus {
+			-webkit-box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.075), 0 0 8px rgba(255, 255, 255, 0.4);
+			-moz-box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.075), 0 0 8px rgba(255, 255, 255, 0.4);
+			box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.075), 0 0 8px rgba(255, 255, 255, 0.4);
+		}
+	}
+
+	.breaker {
+		margin-top: 65px;
+	}
+
+	.signUpWrapper {
+		text-align: center;
+		width: 50%;
+		display: inline-block;
+	}
+
+	.loginWrapper {
+		text-align: center;
+		width: 50%;
+		display: inline-block;
+	}
+
+	.tabAdjust {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		margin-top: -15px;
+		margin-left: -20px;
+		margin-right: -20px;
+		white-space: nowrap;
+	}
+
+	.bottomText {
+		color: @landingblue;
+	}
+
+	.auth-attention.spaceAdjust {
+  	margin: 120px 0 0 0;
+	}
+
+	.statusText {
+		font-family: OpenSansBold;
+	}
+
+
+	footer.loggedOut {
+		border-top: none;
+	}
+
+	.loggingIn, .error, .success, .fa-exclamation-triangle {
+	  color: @white !important;
+	}
+
+    .loginOverlay {
+      position:fixed;
+      top:0;
+      left:0;
+      background:rgba(0,0,0,0.6);
+      z-index:5;
+      width:100%;
+      height:100%;
+
+    	.loader {
+          min-height: 84px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 84px;
+          height: 84px;
+          z-index: 10;
+        }
+    }
+
+	form .checking {
+  	color: @landingblue;
+	}
+
+	.popover h3, .popover-content {
+		color: @black;
+	}
+	.popover-content {
+	 	a {
+	      color: @black;
+	      text-decoration: underline !important;
+	      &:hover {
+	      	text-decoration: underline;
+	      	color: #000;
+	      }
+	    }
+	}
+	.maskedPhone {
+		color: @white;
+	}
+
+
+
+
+	//buttons
+	form.ng-invalid .btn-success {
+		background: rgba(255,255,255,0.2);
+		border: none;
+		-o-transition:.5s;
+		-ms-transition:.5s;
+		-moz-transition:5s;
+		-webkit-transition:.5s;
+		transition:.5s;
+	}
+
+	.btn-cancel {
+		// color: @landingblue !important;
+		&:hover {
+			color: @white !important;
+			text-decoration: none;
+		}
+	}
+
+	.btn-success {
+		background: rgba(255,255,255,0.2);
+		border: 1px solid @white;
+		-o-transition:.5s;
+		-ms-transition:.5s;
+		-moz-transition:5s;
+		-webkit-transition:.5s;
+		transition:.5s;
+
+		&:hover {
+			background: rgba(255,255,255,0.4);
+			-o-transition:.5s;
+			-ms-transition:.5s;
+			-moz-transition:5s;
+			-webkit-transition:.5s;
+			transition:.5s;
+			span {
+				color: @white;
+				text-decoration: none;
+			}
+		}
+
+	}
+
+}
+
+//login specific
+#t-login, .hashchange {
+
+	h2.signUpTop a {
+		color: @midgray !important;
+		display: block;
+		background: rgba(0,0,0,0.2);
+		padding: 15px;
+		&:hover {
+			color: @white !important;
+		}
+	}
+
+	.tabBg {
+		background: rgba(0,0,0,.6);
+		height: 100px;
+		right:  17.7%;
+		width: 16%;
+		position: absolute;
+		border-top-left-radius: 5px;
+		cursor: pointer;
+	}
+
+  .learnMore {
+    text-align: center;
+    color: @white;
+  }
+
+  .signUpInfo {
+    text-align: center;
+    color: @white;
+    padding-top: 10px;
+  }
+}
+
+//privacy policy and tou
+.t-privacypolicy, .t-tou, .t-tou-june-2015{
+
+	p a {
+		color: @brand-success !important;
+	}
+
+	.landingContainer {
+		background: @white !important;
+	}
+
+	.whyUse, .gateways, .featuredGateways {
+		visibility: hidden;
+	}
+
+	header h2 {
+		text-align: center;
+    font: 34px 'OpenSansLight';
+	}
+
+}
+
+	//breakpoints
+
+  @media (max-width: 1090px) {
+
+		h2.signUpTop, h2.loginTop {
+  		font-size: 2em !important;
+		}
+
+		.tabBg {
+  		height: 85px !important;
+		}
+
+		.welcomeText {
+			font-size: 44px !important;
+		}
+
+  }
+
+
+  @media (max-width: 767px) {
+
+		.tabBg {
+  		width: 48% !important;
+		}
+
+		.t-login .tabBg, .pm-default .tabBg {
+  		left: 15px !important;
+		}
+
+  }
+
+
+
+
+  @media (max-width: 991px) and (min-width: 768px)  {
+
+		.tabBg {
+  		width: 25% !important;
+		}
+
+		.t-login .tabBg, .pm-default .tabBg {
+  		left: 50%;
+		}
+
+  }
+
+  @media (min-width: 1200px)	{
+
+		img.cbcHolder {
+  		width: 75%;
+		}
+  }

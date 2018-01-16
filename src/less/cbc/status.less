@@ -1,0 +1,314 @@
+@statusWidth: 350px;
+@notifyMargin: 3px;
+
+#status {
+  position: absolute;
+  top: 18px;
+  right: @grid-gutter-width/2;
+  width: @statusWidth;
+  height: 81px;
+  background-color: @white;
+  .rounded(5px);
+  border: 1px solid @midgray;
+  z-index: 100;
+
+  .nav-toggle {
+    display: none;
+    font-size: 30px;
+    text-align: center;
+
+    a {
+      display: block;
+      margin: 20px 0;
+      cursor: pointer;
+      color: @black;
+    }
+  }
+
+  @media (max-width: @screen-sm-max) {
+    top: 0;
+    width: 100%;
+    .rounded(0 0 5px 5px);
+    border-top: none;
+
+    .nav-toggle {
+      display: block;
+    }
+  }
+
+  @media (max-width: @screen-xs-max) {
+    .rounded(0);
+    border-left: none;
+    border-right: none;
+  }
+
+  .user {
+    line-height: 40px;
+
+    .tooltip {
+      line-height: 20px;
+    }
+
+    .fa-question-circle {
+      display: inline-block;
+      margin: 12px 0 0 5px;
+      cursor: pointer;
+      color: @darkgray;
+    }
+
+    .logout {
+      text-align: right;
+    }
+
+    .balances {
+      border-top: 1px solid @midgray;
+    }
+  }
+
+  .balance {
+    font: 17px 'OpenSansLight';
+    color: @black;
+
+    .currency {
+      margin-left: 3px;
+      font-size: 11px;
+    }
+  }
+
+  ul.secondary {
+    padding: 0;
+    list-style-type: none;
+    background-color: @white;
+    .border-radius(0, 10px, 10px, 0);
+    margin: 0 -@grid-gutter-width/2;
+
+    li {
+      text-align: right;
+      padding-left: 4px;
+      padding-right: 35px;
+      display: none;
+    }
+
+    .negative {
+      color: @midred;
+    }
+
+    // When not expanded we only show the first secondary currency.
+    li:first-child {
+      border-left: 1px solid @midgray;
+      display: block;
+      line-height: 36px;
+    }
+  }
+
+  .toggle-secondary {
+    cursor: pointer;
+    position: absolute;
+    top: 14px;
+    right: 15px;
+
+    // Dropdown arrow
+    &:after {
+      .virtualel;
+      display: block;
+      width: 14px;
+      border: 7px solid transparent;
+      border-top: 8px solid @darkgray;
+      content: "";
+    }
+  }
+
+  &.expand {
+    // Removing the bottom right corner when the secondary currencies are
+    // expanded provides a smoother transition between the box shadows.
+    .border-radius(5px, 0, 5px, 5px);
+
+    // Show all secondary currencies
+    ul.secondary {
+      border-top: none;
+      border: 1px solid @midgray;
+      margin: 0 -@grid-gutter-width/2-1 0 -@grid-gutter-width/2;
+
+      li {
+        border: none;
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .message {
+    .rounded(5px);
+    font-size: 12px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid @midgray;
+    background: @midgray;
+    font-family: OpenSansRegular;
+
+    .number {
+      font-size: 18px;
+    }
+
+    .currency {
+      font-size: 12px;
+    }
+
+    &.type-success {
+      color: @state-success-text;
+      background-color: @state-success-bg;
+      border-color: @midgray;
+    }
+
+    &.type-info {
+      background-color: @notification-info-background;
+      color: @notification-info-text;
+      border-color: @midgray;
+    }
+
+    &.type-warning {
+      background-color: @state-warning-bg;
+      color: @state-warning-text;
+      border-color: @midgray;
+    }
+
+    &.type-error {
+      background-color: @state-danger-bg;
+      color: @state-danger-text;
+      border-color: @midgray;
+    }
+
+    &.type-offline {
+      color: @darkgray;
+      background-color: @black;
+      border-color: @midgray;
+    }
+  }
+}
+
+#notification {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: @statusWidth;
+
+  .notification {
+    z-index: 1000;
+    background: @white;
+    border: 1px solid @midgray;
+    border-top: none;
+    position: absolute;
+    top: 0;
+    right: 50px;
+    z-index: 50;
+    width: 100%;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    -moz-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
+    &.active {
+      top: 40px;
+    }
+
+    &.type-success {
+//      background-color: @lightgreen;
+    }
+
+    &.type-info {
+//      background-color: @lightblue;
+    }
+
+    &.type-warning {
+//      background-color: @lightyellow;
+    }
+
+    &.type-error {
+//      background-color: @lightred;
+    }
+    &.type-success {
+      color: @state-success-text;
+      background-color: @state-success-bg;
+      border-color: @midgray;
+    }
+
+    &.type-info {
+      background-color: @notification-info-background;
+      color: @notification-info-text;
+      border-color: @midgray;
+    }
+
+    &.type-warning {
+      background-color: @state-warning-bg;
+      color: @state-warning-text;
+      border-color: @midgray;
+    }
+
+    &.type-error {
+      background-color: @state-danger-bg;
+      color: @state-danger-text;
+      border-color: @midgray;
+    }
+
+    &.type-offline {
+      color: @midgray;
+      background-color: @black;
+      border-color: @midgray;
+    }
+    &.type-offline {
+      font-weight: bold;
+      color: @white;
+      background-color: @black;
+    }
+  }
+
+  @media (max-width: @screen-sm-max) {
+    position: fixed;
+    top: 0;
+    width: 90%;
+    z-index: 100;
+    margin-top: 5%;
+    margin-right: 5%;
+    margin-left: 5%;
+
+    .notification {
+      top: -200px;
+      padding: 20px;
+      padding-left: 10%;
+      padding-right: 10%;
+      font-size: 20px;
+      line-height: 30px;
+      opacity: 0;
+      .rounded(5px);
+
+      .number {
+        font-size: 20px;
+      }
+
+      .currency {
+        font-size: 20px;
+      }
+
+      &.active {
+        top: 0;
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+#status-anon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  background-image: url('/img/options.png');
+  span {
+    display: none;
+  }
+}

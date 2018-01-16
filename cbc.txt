@@ -1,0 +1,2 @@
+[authinfo_url]
+https://id.cbc.com/v1/authinfo

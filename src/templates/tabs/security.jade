@@ -1,0 +1,84 @@
+section.col-xs-12.content(ng-controller="SecurityCtrl")
+  div(ng-show='debug') This page is not available in debug mode
+
+  .row(ng-show='!debug')
+    .col-xs-12(ng-hide="isUnlocked")
+      .auth-attention.sessionUnlock
+        h5(l10n) Active Session Timeout
+        .status(l10n) To view or edit your security settings, you must currently have an active session.
+        .row
+          .col-xs-12.col-sm-5
+            form(ng-submit="restoreSession()")
+              label(for="sessionPassword", l10n) Password
+              input.form-control#sessionPassword(type="password",
+              name="sessionPassword", ng-model="sessionPassword", rp-focus)
+              button.btn.btn-primary.btn-block(type="submit", ng-disabled="isConfirming")
+                img(src="img/button-s.png", class="loader", ng-show="isConfirming")
+                span(l10n) Restore Session
+      .alert.alert-danger(ng-show="unlockError")
+        span(l10n) Entered password is wrong.
+    div.col-xs-12(ng-show="!loadingAccount && !account.Balance && loadState.account && connected")
+      include ../tabs/banner/unfunded
+    div(ng-show='hasRTJapanTrust')
+      include banner/rtjapan
+    div(ng-show='hasRTJapanTrustWithRippling')
+      include banner/rtjapanrippling
+    .col-sm-12.notification-wrapper
+      .alert.alert-danger(ng-show="errorSetPasswordProtection") Error saving password protection settings.
+      .alert.alert-success(ng-show="success.enableRequirePassword", l10n) Password protection has been successfully enabled.
+      .alert.alert-success(ng-show="success.disableRequirePassword", l10n) Password protection has been successfully disabled.
+    .col-sm-4.col-md-3.col-xs-12(ng-show="isUnlocked")
+      include ../tabs/settings/navbar
+    .col-sm-8.col-md-9.col-xs-12.list(ng-show="isUnlocked")
+      .show-security(ng-show="settingsPage == 'security'")
+        div
+          h4(l10n) Security settings
+          .section
+            .descriptor(l10n) Identity Verification
+            .row
+            label(l10n) cbc Trade will verify you by matching information from your
+              |  online account to an official ID or through third party agents.&nbsp;
+              a(href="https://cbc.com/knowledge_center/cbc-trade-launches-identity-verification", target="_blank", l10n) Learn more.
+            .row.row-padding-small-xs
+              .col-xs-0.col-sm-4.col-md-6
+              .col-xs-12.col-sm-8.col-md-6.save-btn-wrapper
+                .description
+                  a.btn.btn-block.btn-success.btn-xs.submit(href="{{globalOptions.ids_url}}/identity",
+                  target="_blank", l10n) Verify or Check Status of Identity
+          .section
+            .descriptor(l10n) Security settings
+            .row
+            label(l10n) You can now manage your security settings such as secret key,
+              |  password, and two-factor authentication by clicking edit.
+            .row.row-padding-small-xs
+              .col-xs-9.col-sm-8.col-md-8
+              .col-xs-3.col-sm-4.col-md-4
+                a.btn.btn-cancel.btn-block(href="{{globalOptions.ids_url}}/identity", target="_blank", l10n) edit
+          .section
+            .descriptor(l10n) Password protection for transactions
+            .row.row-padding-small-xs
+              .col-xs-12
+                .description(l10n) If you turn off password requests, you’ll still need to enter your password after each page refresh.
+                div.helperInput
+                  form(name="persistUnlock", ng-submit="setPasswordProtection()")
+                    .row(ng-hide="editUnlock")
+                      .col-xs-6.col-sm-5.col-md-4
+                        .description Require password
+                      .col-xs-3.col-sm-3.col-md-4
+                        div.description
+                          div(ng-show="requirePassword", l10n) Yes
+                          div(ng-hide="requirePassword", l10n) No
+                      .col-xs-3.col-sm-4.col-md-4
+                        div
+                          a.btn.btn-cancel.btn-block#edit(href="", ng-click="editUnlock = true", l10n) edit
+                    .row.edit-security-pswd(ng-show="editUnlock")
+                      .col-xs-6.col-sm-5.col-md-4
+                        .description Require password
+                      .col-xs-6.col-sm-3.col-md-2
+                        div.helperInput.description
+                          label
+                            input(type="checkbox", name="unlock", ng-checked='requirePassword', ng-click="requirePasswordChanged = true")
+                      .col-xs-12.col-sm-4.col-md-4.save-btn-wrapper
+                        .description
+                          button.btn.btn-block.btn-success.btn-xs.submit#save(type='submit'
+                          ng-disabled='serverForm.$invalid', l10n) Save

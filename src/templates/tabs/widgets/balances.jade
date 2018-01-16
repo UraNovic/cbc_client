@@ -1,0 +1,86 @@
+.widget.widget-balances
+  h4(ng-click='showWidgetBalances=!showWidgetBalances'
+    ng-init='showWidgetBalances=true')
+    span(l10n) Balances
+    i.fa.fa-fw.fa-caret-down(ng-class="{'closed': !showWidgetBalances}")
+
+  div(rp-slide='showWidgetBalances')
+    ul.fa-ul(ng-class="{'blank': !balances}")
+      li.currency-cbc(ng-click="entry.show=!entry.show", ng-init="entry.show=true")
+        i.fa-li.fa-money
+        h5 cbc
+        div(ng-show="account.Balance")
+          span.balance(rp-popover
+            rp-popover-placement="top"
+            rp-popover-trigger="hover"
+            rp-popover-delay
+            l10n-rp-popover-content="Balance<br>{{ account.Balance | rpamount }} cbc"
+            ) {{ account.Balance | rpamount:{abs_precision: 4} }}
+        div(ng-hide="account.Balance") 0.00
+        dl(rp-slide="entry.show")
+          dt
+            span(l10n) Reserve
+            | &#32;
+            i.fa.fa-question-circle(
+              rp-popover
+              rp-popover-placement="bottom"
+              l10n-rp-popover-title="Reserve amount"
+              rp-popover-trigger="hover"
+              l10n-data-content="Minimum amount of cbc required to fund your account. You cannot spend the reserve.")
+          dd(ng-show="account.reserve")
+            span.balance(rp-popover
+              rp-popover-placement="top"
+              rp-popover-trigger="hover"
+              rp-popover-delay
+              l10n-rp-popover-content="Reserve amount<br>{{ account.reserve | rpamount }} cbc"
+              ) {{ account.reserve | rpamount:{abs_precision: 4} }}
+          dd(ng-hide="account.reserve") 0.00
+
+          dt
+            span(l10n) Available
+            | &#32;
+            i.fa.fa-question-circle(
+              rp-popover
+              rp-popover-placement="bottom"
+              l10n-rp-popover-title="Available amount"
+              rp-popover-trigger="hover"
+              l10n-data-content="Total amount of cbc in your account minus the reserve amount.")
+          dd(ng-show="account.max_spend")
+            span.balance(rp-popover
+              rp-popover-placement="top"
+              rp-popover-trigger="hover"
+              rp-popover-delay
+              l10n-rp-popover-content="Available amount<br>{{ account.max_spend | rpamount }} cbc"
+              ) {{ account.max_spend | rpamount:{abs_precision: 4} }}
+          dd(ng-hide="account.max_spend") 0.00
+
+      li(
+        ng-repeat="entry in balances"
+        ng-class="'currency-' + (entry.total | rpcurrency | lowercase)"
+        ng-click="entry.show=!entry.show"
+        ng-init="entry.show=true")
+        i.fa-li.fa-money(ng-class="'fa-' + (entry.total | rpcurrency | lowercase)")
+        h5 {{ entry.total | rpcurrency }}
+        div
+          span.balance(rp-popover
+            rp-popover-placement="top"
+            rp-popover-trigger="hover"
+            rp-popover-delay
+            l10n-rp-popover-content="Balance<br>{{ entry.total | rpamount:{precision: 30, hard_precision: true} }} {{ entry.total | rpcurrency }}"
+            ) {{ entry.total | rpamount:{tiny_precision: 3} }}
+        dl(rp-slide="entry.show")
+          div(ng-repeat="(issuer, component) in entry.components")
+            dt(ng-show="component.gateway.app")
+              span(rp-address-popover="component.gateway.app") {{component.gateway.app.name}}
+            dt(ng-hide="component.gateway.app")
+              span(rp-pretty-identity="issuer", rp-pretty-issuer-contacts="userBlob.data.contacts", rp-address-popover="issuer")
+            dd
+              span.balance(rp-popover
+                rp-popover-placement="top"
+                rp-popover-trigger="hover"
+                rp-popover-delay
+                l10n-rp-popover-content="Balance<br>{{ component | rpamount:{precision: 30, rel_min_precision: -2, hard_precision: true} }} {{ entry.total | rpcurrency }}"
+                ) {{ component | rpamount:{tiny_precision: 3} }}
+
+    p(ng-show="$route.current.tabName == 'balance'")
+      a.btn.btn-cancel(href="#/cbc", l10n) add gateway
